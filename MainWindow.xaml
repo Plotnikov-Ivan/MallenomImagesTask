@@ -1,0 +1,76 @@
+﻿<Window x:Class="MallenomDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MallenomDesktop"
+        mc:Ignorable="d"
+        Title="Управление изображениями" Height="450" Width="800">
+    <Grid>
+        <!-- Определение строк и столбцов для Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Основная область для DataGrid -->
+            <RowDefinition Height="Auto" />
+            <!-- Область для кнопок -->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!-- Основная колонка -->
+        </Grid.ColumnDefinitions>
+
+        <!-- DataGrid для отображения изображений -->
+        <DataGrid x:Name="ImagesDataGrid"
+                  Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="ImagesDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <!-- Колонка "Наименование" -->
+                <DataGridTextColumn Header="Наименование"
+                                    Binding="{Binding Name}"
+                                    Width="*" />
+                <!-- Колонка "Изображение" -->
+                <DataGridTemplateColumn Header="Изображение"
+                                         Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageSource}"
+                                   Width="100"
+                                   Height="100"
+                                   Stretch="Uniform" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Панель с кнопками -->
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="10">
+            <!-- Кнопка "Добавить" -->
+            <Button x:Name="AddButton"
+                    Content="Добавить"
+                    Width="100"
+                    Margin="5"
+                    Click="AddButton_Click" />
+            <!-- Кнопка "Изменить" -->
+            <Button x:Name="UpdateButton"
+                    Content="Изменить"
+                    Width="100"
+                    Margin="5"
+                    IsEnabled="False"
+                    Click="UpdateButton_Click" />
+            <!-- Кнопка "Удалить" -->
+            <Button x:Name="DeleteButton"
+                    Content="Удалить"
+                    Width="100"
+                    Margin="5"
+                    IsEnabled="False"
+                    Click="DeleteButton_Click" />
+        </StackPanel>
+    </Grid>
+    </Window>
